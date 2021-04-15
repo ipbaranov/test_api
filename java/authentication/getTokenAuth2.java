@@ -21,8 +21,8 @@ public class getTokenAuth2 {
         RestAssured.baseURI = "https://api-m.paypal.com/";
     }
     private static String endpoint_rest = "/oauth2/token";
-    private static String CLIENT_ID = "AfQmRuaazQE-8kurb9kAkMXozVelC3kwTf6PUGkcprTYlQD4arpSaKE6GvuCUBCDGTisoTglpL79-mcT";
-    private static String CLENT_SECRET = "EKV3Tq9lUMZBjSl_pvkxIZ3FdBtLDTc1_Pyjusa3Yt443Gs_PK5f_gNyIUREFTG4dlNfmia9fqhgbQY-";
+    private static String CLIENT_ID = "AfQmRuaazQE-8kurb9kAkMXoz55555555555kcprTYlQD4arpSaKE6Gvu5555oTglpL79-mcT";
+    private static String CLENT_SECRET = "EKV5555ZBjSl_pvkxIZ55555555555a3Yt443Gs_PK5f_gNyIUREFTG4dlNfmia9fqhgbQY-";
 
     @Test
     public void testOAuthWithClientCredential() throws JSONException {
@@ -37,12 +37,7 @@ public class getTokenAuth2 {
                 .post(baseURI+endpoint_rest);
 
 
-        /*JSONObject JSONResponseBody = new JSONObject(response.getBody().asString());
-        String accessToken = JSONResponseBody.getString("access_token");
-        String tokenType = JSONResponseBody.getString("token_type");
-        System.out.println("Oauth Token with type " + tokenType + "   " + accessToken);
-
-         */}
+        
         public static String parseForAccessToken  (Response response) {
 
             JSONObject JSONResponseBody = new JSONObject(response.getBody().asString());
@@ -65,7 +60,7 @@ public class getTokenAuth2 {
         //Setting API's body
 
 
-        //Setting content type as application/json or application/xml
+        //Setting content type as application/json or application/json
         builder.setContentType("application/json");
 
         //builder.setAccept(ContentType.JSON);

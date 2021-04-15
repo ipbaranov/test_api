@@ -17,6 +17,7 @@ import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
 
 public class authBasic {
+    
     private String path = "/auth";
     private String username = "admin";
     private String password = "password123";

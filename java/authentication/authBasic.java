@@ -82,7 +82,6 @@ public class authBasic {
         System.out.println(result);
 
 
-        //Asserting that result of Norway is Oslo
         Assert.assertTrue(true);
 
 

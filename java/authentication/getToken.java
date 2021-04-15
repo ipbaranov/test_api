@@ -13,10 +13,14 @@ import static io.restassured.RestAssured.requestSpecification;
 
 
 public class getToken {
+      @BeforeAll
+    public static void setup() {
+        RestAssured.baseURI = "https://api-m.paypal.com/";
+    }
 
     public static Response response;
-    private String userAdminClientId = System.getenv("AfQmRuaazQE-8kurb9kAkMXozVelC3kwTf6PUGkcprTYlQD4arpSaKE6GvuCUBCDGTisoTglpL79-mcT");
-    private String userAdminClientSecret = System.getenv("EKV3Tq9lUMZBjSl_pvkxIZ3FdBtLDTc1_Pyjusa3Yt443Gs_PK5f_gNyIUREFTG4dlNfmia9fqhgbQY-");
+    private String userAdminClientId = System.getenv("AfQmRuajjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjQD4arpSaKE6GvuCUBCDGTisoTglpL79-mcT");
+    private String userAdminClientSecret = System.getenv("EKV3Tq9ljjjjjjjjjjjjjjjjt443Gs_PK5f_gNyIUREFTG4dlNfmia9fqhgbQY-");
 
     private String oauth2Payload = "{\n" +
             "  \"client_id\": \"" + userAdminClientId + "\",\n" +
@@ -48,10 +52,7 @@ public class getToken {
                 .jsonPath().getString("access_token");
     }
 
-    @BeforeAll
-    public static void setup() {
-        RestAssured.baseURI = "https://api-m.paypal.com/";
-    }
+  
 
     @Test
     public void createUser() {

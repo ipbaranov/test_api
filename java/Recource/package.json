@@ -3,7 +3,7 @@
   "total":22,
   "items":[
     {
-      "id":196,
+      "id":1,
       "name":"",
       "code":"aktau",
       "country":{
@@ -12,7 +12,7 @@
       }
     },
     {
-      "id":167,
+      "id":2,
       "name":"Актобе",
       "code":"aktobe",
       "country":{
@@ -21,7 +21,7 @@
       }
     },
     {
-      "id":67,
+      "id":3,
       "name":"Алматы",
       "code":"almaty",
       "country":{
@@ -30,7 +30,7 @@
       }
     },
     {
-      "id":112,
+      "id":4,
       "name":"Бишкек",
       "code":"bishkek",
       "country":{
@@ -39,7 +39,7 @@
       }
     },
     {
-      "id":114,
+      "id":5,
       "name":"Владикавказ",
       "code":"vladikavkaz",
       "country":{
@@ -48,7 +48,7 @@
       }
     },
     {
-      "id":25,
+      "id":6,
       "name":"Владивосток",
       "code":"vladivostok",
       "country":{
@@ -57,7 +57,7 @@
       }
     },
     {
-      "id":105,
+      "id":7,
       "name":"Днепр",
       "code":"dnepropetrovsk",
       "country":{
@@ -75,7 +75,7 @@
       }
     },
     {
-      "id":26,
+      "id":8,
       "name":"Магнитогорск",
       "code":"magnitogorsk",
       "country":{
@@ -84,7 +84,7 @@
       }
     },
     {
-      "id":32,
+      "id":9,
       "name":"Москва",
       "code":"moscow",
       "country":{

@@ -182,15 +182,5 @@ public class restAssuredExample {
 
 
     }
-    @Test
-    public void apiTest(){ //https://stackoverflow.com/questions/45416987/rest-assured-extract-value-from-response-list
-        List<Item> list = given()
-                .contentType(ContentType.JSON)
-                .when()
-                .get("https://jsonplaceholder.typicode.com/posts")
-                .then().log().all()
-                .extract().jsonPath().using((GsonObjectMapperFactory) (aClass, s) -> new GsonBuilder().setPrettyPrinting().create())
-                .getList("findAll {it.userId == 6}.findAll {it.title.contains('sit')}", Item.class);
-        list.forEach(System.out::println);
-    }
+   
 }

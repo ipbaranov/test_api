@@ -20,8 +20,8 @@ public class getAccessTokenBarer {
     }
 
 
-    private static String username = "AfQmRuaazQE-8kurb9kAkMXozVelC3kwTf6PUGkcprTYlQD4arpSaKE6GvuCUBCDGTisoTglpL79-mcT";
-    private static String password = "EKV3Tq9lUMZBjSl_pvkxIZ3FdBtLDTc1_Pyjusa3Yt443Gs_PK5f_gNyIUREFTG4dlNfmia9fqhgbQY-";
+    private static String username = "AfhhhhhhhhhhhhhhrpSaKE6GvuCUBCDGTisoTglpL79-mcT";
+    private static String password = "EKV3Tq9lUMZBjSl_pvkxIZ3FdBtLDgggggggggggggia9fqhgbQY-";
 
 
     private static String token_resource = "https://api-m.paypal.com/v1";

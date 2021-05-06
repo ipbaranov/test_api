@@ -21,7 +21,7 @@ import static io.restassured.RestAssured.*;
 public class RestTest {
 
     public static String jsonAsString;
-    String Token1 = "e9d4ybokgrkwx5krx9ollorhc9i3csmmbcmyuuer";
+    String Token1 = "token";
 
 
     @BeforeClass

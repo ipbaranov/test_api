@@ -1,6 +1,7 @@
 package suiteTestExample;
 
 import com.google.gson.GsonBuilder;
+import de.zeigermann.xml.simpleImporter.Item;
 import helperMethods.GetContentJson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -23,7 +24,7 @@ public class restAssuredExample {
 
     @Test
     public void UsingQueryParametr_q_BasicSearch()   {
-        given().queryParam("q", "Петер").expect().body("items.name", is(Arrays.asList("Санкт-Петербург"))).when().get("https://regions-test.2gis.com/1.0/regions");    }
+        given().queryParam("q", "Петер").expect().body("items.name", is(Arrays.asList("Санкт-Петербург"))).when().get();    }
 
     @Test
     public void UsingQueryParametr_g_minNumberlettersTosearch()   {
@@ -169,28 +170,19 @@ public class restAssuredExample {
                 "https://regions-test.2gis.com/1.0/regions").then().extract().
                 path("items.country.code") ;
         boolean test=true;
-        //массивы просто для примера чтоб их имена использовать
+
         for (String ad:a){
 
             if(!(b.stream().anyMatch(x-> x==ad)))
             {
                 test = false;
                 System.out.println("Содержит не все элементы " +ad);
-                //break;
+
             }
         }
 
 
     }
-    @Test
-    public void apiTest(){ //https://stackoverflow.com/questions/45416987/rest-assured-extract-value-from-response-list
-        List<Item> list = given()
-                .contentType(ContentType.JSON)
-                .when()
-                .get("https://jsonplaceholder.typicode.com/posts")
-                .then().log().all()
-                .extract().jsonPath().using((GsonObjectMapperFactory) (aClass, s) -> new GsonBuilder().setPrettyPrinting().create())
-                .getList("findAll {it.userId == 6}.findAll {it.title.contains('sit')}", Item.class);
-        list.forEach(System.out::println);
-    }
+
+
 }

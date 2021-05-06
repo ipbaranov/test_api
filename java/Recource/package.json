@@ -4,8 +4,9 @@
   "items":[
     {
       "id":196,
-      "name":"",
+      "name": "Harry Potter and the Chamber of Secrets",
       "code":"aktau",
+      "author":"Vladimir Nabokov" ,
       "country":{
         "name":"Казахстан",
         "code":"kz"
@@ -13,7 +14,7 @@
     },
     {
       "id":167,
-      "name":"Актобе",
+      "name":"The Da Vinci Code",
       "code":"aktobe",
       "country":{
         "name":"Казахстан",
@@ -22,7 +23,7 @@
     },
     {
       "id":67,
-      "name":"Алматы",
+      "name":"The Alchemist (O Alquimista)",
       "code":"almaty",
       "country":{
         "name":"Казахстан",
@@ -31,8 +32,9 @@
     },
     {
       "id":112,
-      "name":"Бишкек",
+      "name":"Lolita",
       "code":"bishkek",
+      "author":"Vladimir Nabokov" ,
       "country":{
         "name":"Кыргызстан",
         "code":"kg"

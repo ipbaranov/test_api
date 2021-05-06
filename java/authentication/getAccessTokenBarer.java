@@ -9,8 +9,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.UnsupportedEncodingException;
-import java.net.http.HttpResponse;
-
 import static io.restassured.RestAssured.*;
 import static org.mortbay.jetty.security.B64Code.encode;
 

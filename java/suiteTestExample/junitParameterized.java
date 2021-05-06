@@ -11,9 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class junitParameterized {
 
-    /**
-     * Created for JavaStudy.ru
-     */
     @RunWith(Parameterized.class)
     public class RestApiDemo {
         private int code;

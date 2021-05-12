@@ -8,18 +8,24 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.mapper.factory.GsonObjectMapperFactory;
 import io.restassured.response.Response;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.hasValue;
 import static org.hamcrest.Matchers.is;
 
 public class restAssuredExample {
-    List<String> B;
+    @BeforeClass
+    public static void setup() {
+        RestAssured.baseURI = "https://exampel.com/1.0";
+        RestAssured.basePath = "/regions";
+
+    }
 
 
     @Test
@@ -28,18 +34,18 @@ public class restAssuredExample {
 
     @Test
     public void UsingQueryParametr_g_minNumberlettersTosearch()   {
-        given().queryParam("q", "мск").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get("https://regions-test.2gis.com/1.0/regions");
+        given().queryParam("q", "мск").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get(baseURI+basePath);
     }
 
     @Test
     public void UsingQuery_g_CapitalLetters()   {
-        given().queryParam("q", "МсК").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get("https://regions-test.2gis.com/1.0/regions");
+        given().queryParam("q", "МсК").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get(baseURI+basePath);
     }
 
     @Test
     public void UsingQuery_g_less_minLetters()   {
         Object myObj = null;
-        given().queryParam("q", "Мс").expect().body("items.name", is(myObj)).when().get("https://regions-test.2gis.com/1.0/regions");
+        given().queryParam("q", "Мс").expect().body("items.name", is(myObj)).when().get(baseURI+basePath);
     }
 
     @Test
@@ -50,28 +56,28 @@ public class restAssuredExample {
 
     @Test
     public void UsingQuery_g_and_CountreCodeChekThatIgnor()   {
-        given().queryParam("q", "мск", "country_code", "cz").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get("https://regions-test.2gis.com/1.0/regions");
+        given().queryParam("q", "мск", "country_code", "cz").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get(baseURI+basePath);
     }
 
     @Test
     public void UsingQuery_g_and_pageChekThatIgnor()   {
-        given().queryParam("q", "мск", "page", "0").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get("https://regions-test.2gis.com/1.0/regions");
+        given().queryParam("q", "мск", "page", "0").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get(baseURI+basePath);
     }
 
     @Test
     public void UsingQuery_g_and_pageSizeChekThatIgnor()   {
-        given().queryParam("q", "мск", "page_size", "0").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get("https://regions-test.2gis.com/1.0/regions");
+        given().queryParam("q", "мск", "page_size", "0").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get(baseURI+basePath);
     }
     @Test
     public void UsingQuery_Country_codeEmptyValue() {
-        given().queryParam("country_code", " ").expect().when().get("https://regions-test.2gis.com/1.0/regions").then().assertThat().statusCode(500);
+        given().queryParam("country_code", " ").expect().when().get(baseURI+basePath).then().assertThat().statusCode(500);
     }
 
 
     @Test
     public void UsingQueryCountry_codeChek()   {
         List categories;
-        categories = GetContentJson.readJsonFileDynamic("/home/ivan/Desktop/projects/Region.json", "$..country[?(@.code == 'kg')]");
+        categories = GetContentJson.readJsonFileDynamic(baseURI+basePath, "$..country[?(@.code == 'kg')]");
         for (Object cat : categories) {
             Assert.assertEquals("{name=Кыргызстан, code=kg}", (cat).toString());
             System.out.println(cat);
@@ -82,7 +88,7 @@ public class restAssuredExample {
     @Test
     public void UsingQueryCountry_code1()   {
         List categories;
-        categories = GetContentJson.readJsonFileDynamic("/home/ivan/Desktop/projects/Region.json", "$..country[?(@.code == 'kz')]");
+        categories = GetContentJson.readJsonFileDynamic(baseURI+basePath, "$..country[?(@.code == 'kz')]");
         for (Object cat : categories) {
             Assert.assertEquals("{name=Казахстан, code=kz}", (cat).toString());
             System.out.println(cat);
@@ -92,7 +98,7 @@ public class restAssuredExample {
     @Test
     public void UsingQueryCountry_code2 ()   {
         List categories;
-        categories = GetContentJson.readJsonFileDynamic("/home/ivan/Desktop/projects/Region.json", "$..country[?(@.code == 'ru')]");
+        categories = GetContentJson.readJsonFileDynamic(baseURI+basePath, "$..country[?(@.code == 'ru')]");
         for (Object cat : categories) {
             Assert.assertEquals("{name=Россия, code=ru}", (cat).toString());
             System.out.println(cat);
@@ -103,12 +109,12 @@ public class restAssuredExample {
     @Test
     public void DefautCountry_codeHasAll() {
         given().queryParam("total", "").expect().body("[code]",  hasValue("kz" )).
-                when().get("https://regions-test.2gis.com/1.0/regions");
+                when().get(baseURI+basePath);
 
     }
     @Test
     public void extractMapOfObjectWithFindAllAndFind_findSinglePlayerOfACertainPositionAndNationality() {
-        Response response = RestAssured.get("https://regions-test.2gis.com/1.0/regions");
+        Response response = RestAssured.get(baseURI+basePath);
 
         ArrayList<String> regioneCode = response.path("items.find { it.code == 'ru'}");
         for(String a:regioneCode){
@@ -121,7 +127,7 @@ public class restAssuredExample {
     }
     @Test
     public  void getSpecificPartOfResponseBody(){
-        ArrayList<String> amounts = RestAssured.get("https://regions-test.2gis.com/1.0/regions").then().extract().path("items.country.code") ;
+        ArrayList<String> amounts = RestAssured.get(baseURI+basePath).then().extract().path("items.country.code") ;
 
         for(String a:amounts){
             if (a.equals("ru" )){
@@ -136,7 +142,7 @@ public class restAssuredExample {
         }}
     @Test
     public void extractLastValueWhenSeveralReturned_findLastTeamName() {
-        Response response = RestAssured.get( "/home/ivan/Desktop/projects/players.json");
+        Response response = RestAssured.get( baseURI+basePath);
         String lastTeamName = response.path("teams.name[-1]");
         System.out.println(lastTeamName);
     }
@@ -145,11 +151,11 @@ public class restAssuredExample {
         List<String> a = new ArrayList<String>(Arrays.asList("kz", "ru", "kg",  "cz"));
         List<String> b = given()
                 .contentType(io.restassured.http.ContentType.JSON).get(
-                        "https://regions-test.2gis.com/1.0/regions").then().extract().
+                        baseURI+basePath).then().extract().
                         path("items.country.code") ;
         // b.forEach(System.out::println);
         boolean test=true;
-        //массивы просто для примера чтоб их имена использовать
+
         for (String ad:a){
 
             if(!(b.stream().anyMatch(x->x.contains(ad))))
@@ -161,13 +167,13 @@ public class restAssuredExample {
 
         }}
     @Test
-    private void extractLastValueWhenSeveralReturned_findLastTeamName3h(){
+    private void extractLastValueWhenSeveralReturned(){
 
 
-        List<String> a = new ArrayList<String>(Arrays.asList("ru","kz", "bu","fr", "kg", "cz", "usa"));
+        List<String> a = new ArrayList<String>(Arrays.asList("ru","kz", "bu","fr", "kg", "cz", "us"));
 
         List<String> b =  given().contentType(io.restassured.http.ContentType.JSON).get(
-                "https://regions-test.2gis.com/1.0/regions").then().extract().
+                baseURI+basePath).then().extract().
                 path("items.country.code") ;
         boolean test=true;
 

@@ -28,30 +28,29 @@ public class restAssuredExample {
 
     @Test
     public void UsingQueryParametr_g_minNumberlettersTosearch()   {
-        given().queryParam("q", "мск").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get("https://regions-test.2gis.com/1.0/regions");
+        given().queryParam("q", "мск").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get("https://regions-test/1.0/regions");
     }
 
     @Test
     public void UsingQuery_g_CapitalLetters()   {
-        given().queryParam("q", "МсК").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get("https://regions-test.2gis.com/1.0/regions");
+        given().queryParam("q", "МсК").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get("https://regions-test/1.0/regions");
     }
 
     @Test
     public void UsingQuery_g_less_minLetters()   {
         Object myObj = null;
-        given().queryParam("q", "Мс").expect().body("items.name", is(myObj)).when().get("https://regions-test.2gis.com/1.0/regions");
+        given().queryParam("q", "Мс").expect().body("items.name", is(myObj)).when().get("https://regions-test/1.0/regions");
     }
 
     @Test
     public void UsingQuery_g_EmptyValue()   {
 
-        given().queryParam("q", "").expect().when().get("https://regions-test.2gis.com/1.0/regions").then().assertThat().statusCode(500);
+        given().queryParam("q", "").expect().when().get("https://regions-test/1.0/regions").then().assertThat().statusCode(500);
     }
 
     @Test
     public void UsingQuery_g_and_CountreCodeChekThatIgnor()   {
-        given().queryParam("q", "мск", "country_code", "cz").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get("https://regions-test.2gis.com/1.0/regions");
-    }
+        given().queryParam("q", "мск", "country_code", "cz").expect().body("items.name", is(Arrays.asList("Омск", "Томск"))).when().get("https://regions-test/1.0/regions"
 
     @Test
     public void UsingQuery_g_and_pageChekThatIgnor()   {
@@ -64,7 +63,7 @@ public class restAssuredExample {
     }
     @Test
     public void UsingQuery_Country_codeEmptyValue() {
-        given().queryParam("country_code", " ").expect().when().get("https://regions-test.2gis.com/1.0/regions").then().assertThat().statusCode(500);
+        given().queryParam("country_code", " ").expect().when().get("https://regions-test/1.0/regions").then().assertThat().statusCode(500);
     }
 
 
@@ -92,7 +91,7 @@ public class restAssuredExample {
     @Test
     public void UsingQueryCountry_code2 ()   {
         List categories;
-        categories = GetContentJson.readJsonFileDynamic("/home/ivan/Desktop/projects/Region.json", "$..country[?(@.code == 'ru')]");
+        categories = GetContentJson.readJsonFileDynamic("/resource/Region.json", "$..country[?(@.code == 'ru')]");
         for (Object cat : categories) {
             Assert.assertEquals("{name=Россия, code=ru}", (cat).toString());
             System.out.println(cat);
@@ -103,12 +102,12 @@ public class restAssuredExample {
     @Test
     public void DefautCountry_codeHasAll() {
         given().queryParam("total", "").expect().body("[code]",  hasValue("kz" )).
-                when().get("https://regions-test.2gis.com/1.0/regions");
+                when().get("/resource/Region.json");
 
     }
     @Test
     public void extractMapOfObjectWithFindAllAndFind_findSinglePlayerOfACertainPositionAndNationality() {
-        Response response = RestAssured.get("https://regions-test.2gis.com/1.0/regions");
+        Response response = RestAssured.get("/resource/Region.json"");
 
         ArrayList<String> regioneCode = response.path("items.find { it.code == 'ru'}");
         for(String a:regioneCode){
@@ -134,22 +133,17 @@ public class restAssuredExample {
 
 
         }}
-    @Test
-    public void extractLastValueWhenSeveralReturned_findLastTeamName() {
-        Response response = RestAssured.get( "/home/ivan/Desktop/projects/players.json");
-        String lastTeamName = response.path("teams.name[-1]");
-        System.out.println(lastTeamName);
-    }
+  
     @Test
     public void extractLastValueWhenSeveralReturned_findLastTeamName1(){
         List<String> a = new ArrayList<String>(Arrays.asList("kz", "ru", "kg",  "cz"));
         List<String> b = given()
                 .contentType(io.restassured.http.ContentType.JSON).get(
-                        "https://regions-test.2gis.com/1.0/regions").then().extract().
+                        "/resource/Region.json").then().extract().
                         path("items.country.code") ;
         // b.forEach(System.out::println);
         boolean test=true;
-        //массивы просто для примера чтоб их имена использовать
+         
         for (String ad:a){
 
             if(!(b.stream().anyMatch(x->x.contains(ad))))
@@ -167,7 +161,7 @@ public class restAssuredExample {
         List<String> a = new ArrayList<String>(Arrays.asList("ru","kz", "bu","fr", "kg", "cz", "usa"));
 
         List<String> b =  given().contentType(io.restassured.http.ContentType.JSON).get(
-                "https://regions-test.2gis.com/1.0/regions").then().extract().
+                "/resource/Region.json").then().extract().
                 path("items.country.code") ;
         boolean test=true;
 

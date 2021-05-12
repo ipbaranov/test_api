@@ -34,7 +34,7 @@ public class RestTest {
     @BeforeClass
     public static void callRidesAPI() {
 
-        Response response = given().auth().oauth2("e9d4ybokgrkwx5krx9ollorhc9i3csmmbcmyuuer").
+        Response response = given().auth().oauth2("token").
                 when().
                 get("").
                 then().

@@ -20,13 +20,12 @@ public class RestTest {
 
     public static String jsonAsString;
     public static String finalResult;
+    protect  String TOKEN = "token";
 
-    String Token1 = "e9d4ybokgrkwx5krx9ollorhc9i3csmmbcmyuuer";
-
-
+    
     @BeforeClass
     public static void setup() {
-        RestAssured.baseURI = "http://begetwin.beget.tech/wp-json/wc/v3";
+        RestAssured.baseURI = "http://example.tech/wp-json/wc/v3";
         RestAssured.basePath = "/customers";
 
     }
@@ -34,7 +33,7 @@ public class RestTest {
     @BeforeClass
     public static void callRidesAPI() {
 
-        Response response = given().auth().oauth2("e9d4ybokgrkwx5krx9ollorhc9i3csmmbcmyuuer").
+        Response response = given().auth().oauth2("token").
                 when().
                 get("").
                 then().
@@ -42,7 +41,7 @@ public class RestTest {
                 extract().response();
         jsonAsString = response.asString();
 
-        finalResult = response.getBody().path("$[]");
+        finalResult = response.getBody().path("");
 
     }
 
